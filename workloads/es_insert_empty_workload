@@ -14,10 +14,10 @@
 # LICENSE file.                                                                                                                                                                   
 
 
-recordcount=1000
-operationcount=1000
+#recordcount=1000
+operationcount=10
 workload=com.yahoo.ycsb.workloads.ESWorkload
-db=com.yahoo.ycsb.ESClientDB
+db=com.yahoo.ycsb.ESClientDummy
 
 readproportion=0
 updateproportion=0
@@ -25,7 +25,10 @@ scanproportion=0
 insertproportion=1
 
 threadcount=10
-target=100
+target=450
 
-source.index.folder=/Users/dbasin/Downloads/data/120471291470218628/data/index/
+docs.src.index.folder=/Users/dbasin/Downloads/data/120471291470218628/data/index/
+es.index.mapping.type=c
+es.index.mapping.file.path=/Users/dbasin/Repositories/pachyderm/TripAdvisorIndex/src/main/resources/SingleFIeldMapping.json
+
 num.of.indices=3000

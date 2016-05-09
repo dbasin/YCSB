@@ -10,7 +10,7 @@ import java.util.Vector;
 /**
  * Created by dbasin on 4/24/16.
  */
-public class ESClientDB extends  DB {
+public class ESClientDummy extends  DB {
     ESClient esClient;
 
     @Override
@@ -30,7 +30,7 @@ public class ESClientDB extends  DB {
 
     @Override
     public Status insert(String index, String json, HashMap<String, ByteIterator> values) {
-        esClient.indexDoc(index,json);
+       // esClient.indexDoc(index,json);
 
         return Status.OK;
     }
@@ -44,6 +44,5 @@ public class ESClientDB extends  DB {
     public void init()
     {
         esClient = new ESClient();
-        esClient.init(getProperties());
     }
 }

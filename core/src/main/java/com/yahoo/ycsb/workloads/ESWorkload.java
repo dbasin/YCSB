@@ -5,7 +5,7 @@ import com.yahoo.ycsb.DB;
 import com.yahoo.ycsb.Status;
 import com.yahoo.ycsb.Workload;
 import com.yahoo.ycsb.generator.DiscreteGenerator;
-import es.PachydermDocsFactory;
+import docs.PachydermDocsFactory;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.nio.file.Path;
@@ -59,9 +59,11 @@ public class ESWorkload extends Workload {
     @Override
     public void init(Properties p)
     {
-        Path path = Paths.get(p.getProperty("source.index.folder"));
-        docsFactory = new PachydermDocsFactory(path);
-        numOfIndices = Integer.parseInt(p.getProperty("num.of.indices","3000"));
+        Path path = Paths.get(p.getProperty("docs.src.index.folder"));
+        docsFactory = new PachydermDocsFactory();
+        docsFactory.init(p);
+
+        numOfIndices = Integer.parseInt(p.getProperty("num.of.indices"));
         operationchooser = CoreWorkload.createOperationGenerator(p);
     }
 
@@ -70,7 +72,9 @@ public class ESWorkload extends Workload {
         Random r = randomThreadLocal.get();
         if(r == null)
         {
-            randomThreadLocal.set(new Random());
+
+            r = new Random();
+            randomThreadLocal.set(r);
         }
 
         return "index" + r.nextInt(numOfIndices);
